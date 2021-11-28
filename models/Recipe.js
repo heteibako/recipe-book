@@ -25,6 +25,8 @@ const RecipeSchema = new Schema(
         type: String,
       },
     ],
+    cost: Number,
+    bakingTime: String,
     slug: {
       type: String,
     },

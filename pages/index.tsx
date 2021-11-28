@@ -10,32 +10,15 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col  py-2">
+    <div className="flex flex-col py-2">
       <Head>
         <title>Susa's Recipebook</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col w-full flex-1 px-20 text-center">
-        {recipes.map((recipe) => (
-          <RecipeCard
-            key={recipe.id}
-            title={recipe.title}
-            createdAt={recipe.createdAt}
-          />
-        ))}
+      <main className="container w-8/12 mx-auto my-5">
+        <RecipeCard recipes={recipes} />
       </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer">
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
     </div>
   );
 }

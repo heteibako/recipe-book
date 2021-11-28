@@ -9,7 +9,7 @@
       "@constants/*": ["api/*"],
       "@hooks/*": ["hooks/*"],
       "@theme/*": ["theme/*"],
-      "@helpers/*": ["helpers/*"],
+      "@lib/*": ["lib/*"],
       "@middlewares/*": ["middlewares/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
