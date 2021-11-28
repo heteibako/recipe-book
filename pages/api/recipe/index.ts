@@ -9,10 +9,11 @@ const handler = nc();
 
 handler
   .get(async (req: NextApiRequest, res: NextApiResponse) => {
-    const competitions = await Recipe.find({
-      eventType: "Verseny",
-    }).sort({ date: 1 });
-    res.status(200).json(competitions);
+    const recipes = await Recipe.find().populate({
+      path: "ingredients",
+      select: "name",
+    });
+    res.status(200).json(recipes);
   })
   .post(async (req: NextApiRequest, res: NextApiResponse) => {
     const { title, description, ingredients, instructions, date, eventType } =

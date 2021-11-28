@@ -1,6 +1,6 @@
 import { Schema, models, model } from "mongoose";
 import slugify from "slugify";
-
+import Ingredient from "./Ingredient";
 const RecipeSchema = new Schema(
   {
     title: {
@@ -22,7 +22,8 @@ const RecipeSchema = new Schema(
     },
     ingredients: [
       {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "Ingredient",
       },
     ],
     cost: Number,

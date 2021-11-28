@@ -9,10 +9,29 @@ interface Recipe {
   instructions: string;
   bakingTime: string;
   cost: number;
+  ingredients: Ingredient[];
 }
 interface RecipeCardProps {
   recipes: Recipe[];
 }
+
+interface Ingredient {
+  name: string;
+  _id: string;
+  gramms: number;
+  price: number;
+  calories: number;
+}
+
+const getingredients = (ingredients: Ingredient[]) => {
+  return ingredients.map((ingredient) => (
+    <p
+      className="text-xs text-gray-600 px-2 bg-gray-200 py-1"
+      key={ingredient._id}>
+      {ingredient.name}
+    </p>
+  ));
+};
 export const RecipeCard = ({ recipes }: RecipeCardProps) => {
   return (
     <div className="flex font-body font-normal">
@@ -24,6 +43,7 @@ export const RecipeCard = ({ recipes }: RecipeCardProps) => {
           description,
           instructions,
           bakingTime,
+          ingredients,
           cost,
         }) => (
           <div className="mx-2 w-3/12 lg:mb-0 mb-8" key={id}>
@@ -57,9 +77,10 @@ export const RecipeCard = ({ recipes }: RecipeCardProps) => {
                     </p>
                   </div>
                   <div className="pl-2">
-                    <p className="text-xs text-gray-600 px-2 bg-gray-200 py-1">
+                    {getingredients(ingredients)}
+                    {/* <p className="text-xs text-gray-600 px-2 bg-gray-200 py-1">
                       Complete box
-                    </p>
+                    </p> */}
                   </div>
                 </div>
                 <div className="flex items-center justify-between py-4">
