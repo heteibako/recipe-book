@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import Head from "next/head";
+
 export default function Layout({ children }) {
   const [show, setShow] = useState(false);
   const [profile, setProfile] = useState(false);
 
   return (
     <>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
+          rel="stylesheet"
+          crossOrigin=""></link>
+      </Head>
       <div className="w-full h-full">
         <div className="flex flex-no-wrap">
           {/* Sidebar starts */}

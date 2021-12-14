@@ -1,101 +1,223 @@
 import React from "react";
-import Image from "next/image";
-import { formatDate } from "@lib/dateHelper";
+import "pure-react-carousel/dist/react-carousel.es.css";
+import {ButtonBack, ButtonNext, CarouselProvider, Slide, Slider,} from "pure-react-carousel";
+
 interface Recipe {
-  title: string;
-  createdAt: string;
-  id: string;
-  description: string;
-  instructions: string;
-  bakingTime: string;
-  cost: number;
-  ingredients: Ingredient[];
+    title: string;
+    createdAt: string;
+    id: string;
+    description: string;
+    instructions: string;
+    bakingTime: string;
+    cost: number;
+    ingredients: Ingredient[];
 }
+
 interface RecipeCardProps {
-  recipes: Recipe[];
+    recipes: Recipe[];
 }
 
 interface Ingredient {
-  name: string;
-  _id: string;
-  gramms: number;
-  price: number;
-  calories: number;
+    name: string;
+    _id: string;
+    gramms: number;
+    price: number;
+    calories: number;
 }
 
 const getingredients = (ingredients: Ingredient[]) => {
-  return ingredients.map((ingredient) => (
-    <p
-      className="text-xs text-gray-600 px-2 bg-gray-200 py-1"
-      key={ingredient._id}>
-      {ingredient.name}
-    </p>
-  ));
+    return ingredients?.map((ingredient) => (
+        <p
+            className="text-xs text-gray-600 px-2 bg-gray-200 py-1"
+            key={ingredient._id}>
+            {ingredient.name}
+        </p>
+    ));
 };
-export const RecipeCard = ({ recipes }: RecipeCardProps) => {
-  return (
-    <div className="flex font-body font-normal">
-      {recipes.map(
-        ({
-          title,
-          createdAt,
-          id,
-          description,
-          instructions,
-          bakingTime,
-          ingredients,
-          cost,
-        }) => (
-          <div className="mx-2 w-3/12 lg:mb-0 mb-8" key={id}>
-            <div>
-              <Image
-                width={300}
-                height={170}
-                objectFit="cover"
-                src="https://cdn.tuk.dev/assets/templates/classified/Bitmap (1).png"
-                className="w-full h-44"
-              />
-            </div>
-            <div className="bg-white">
-              <div className="flex items-center justify-between px-4 pt-4">
-                <div className="bg-yellow-200 py-1.5 px-6 rounded-full">
-                  <p className="text-xs text-yellow-500">Featured</p>
-                </div>
-              </div>
-              <div className="p-4">
-                <div className="flex flex-col items-start">
-                  <h2 className="text-lg font-bold font-body">{title}</h2>
-                  <p className="text-xs text-gray-600">
-                    {formatDate(new Date(createdAt))}
-                  </p>
-                </div>
-                <p className="text-xs text-gray-600 mt-2">{description}</p>
-                <div className="flex mt-4">
-                  <div>
-                    <p className="text-xs text-gray-600 px-2 bg-gray-200 py-1">
-                      {bakingTime ?? "No time specified"}
-                    </p>
-                  </div>
-                  <div className="pl-2">
-                    {getingredients(ingredients)}
-                    {/* <p className="text-xs text-gray-600 px-2 bg-gray-200 py-1">
-                      Complete box
-                    </p> */}
-                  </div>
-                </div>
-                <div className="flex items-center justify-between py-4">
-                  <h2 className="text-indigo-700 text-xs font-semibold">
-                    Bay Area, San Francisco
-                  </h2>
-                  <h3 className="text-indigo-700 text-xl font-semibold">
-                    {`${cost ?? 0}€`}
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </div>
-        )
-      )}
-    </div>
-  );
+export const RecipeCard = ({recipes}: RecipeCardProps) => {
+    return (
+        <div className="flex font-body font-normal">
+            {recipes.map(
+                ({
+                     title,
+                     createdAt,
+                     id,
+                     description,
+                     instructions,
+                     bakingTime,
+                     ingredients,
+                     cost,
+                 }) => (
+                    <div className="">
+                        {/* PLease install Pure React Carousel using "npm i pure-react-carousel" in order to use this component */}
+                        <div className="flex items-center justify-center w-full h-full py-8 px-4">
+                            <div className="w-80">
+                                <div className="flex items-center rounded-t-3xl justify-between bg-white p-6">
+                                    <CarouselProvider
+                                        naturalSlideWidth={50}
+                                        naturalSlideHeight={125}
+                                        totalSlides={3}
+                                        isIntrinsicHeight={true}
+                                        infinite={true}
+                                        className="flex items-center justify-between w-full">
+                                        <ButtonBack className="focus:outline-none cursor-pointer">
+                                            <div
+                                                className="bg-gray-200 w-8 h-8 rounded-full flex items-center cursor-pointer justify-center"
+                                                id="prev2">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    className="icon icon-tabler icon-tabler-chevron-left"
+                                                    width={20}
+                                                    height={20}
+                                                    viewBox="0 0 24 24"
+                                                    strokeWidth="1.5"
+                                                    stroke="#1F2937"
+                                                    fill="none"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <polyline points="15 6 9 12 15 18"/>
+                                                </svg>
+                                            </div>
+                                        </ButtonBack>
+                                        <Slider className="w-40">
+                                            <Slide
+                                                className="flex items-center justify-center"
+                                                index={1}>
+                                                <img
+                                                    alt="phone"
+                                                    src="https://i.ibb.co/bXSwsnN/pngfind-1.png"
+                                                    className="w-40 h-56"
+                                                />
+                                            </Slide>
+                                            <Slide
+                                                className="flex items-center justify-center"
+                                                index={2}>
+                                                <img
+                                                    alt="phone"
+                                                    src="https://i.ibb.co/bXSwsnN/pngfind-1.png"
+                                                    className="w-40 h-56"
+                                                />
+                                            </Slide>
+                                            <Slide
+                                                className="flex items-center justify-center"
+                                                index={3}>
+                                                <img
+                                                    alt="phone"
+                                                    src="https://i.ibb.co/bXSwsnN/pngfind-1.png"
+                                                    className="w-40 h-56"
+                                                />
+                                            </Slide>
+                                        </Slider>
+                                        <ButtonNext className="focus:outline-none cursor-pointer">
+                                            <div
+                                                className="bg-gray-200 w-8 h-8 rounded-full flex items-center cursor-pointer justify-center"
+                                                id="next2">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    className="icon icon-tabler icon-tabler-chevron-right"
+                                                    width={20}
+                                                    height={20}
+                                                    viewBox="0 0 24 24"
+                                                    strokeWidth="1.5"
+                                                    stroke="#1F2937"
+                                                    fill="none"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <polyline points="9 6 15 12 9 18"/>
+                                                </svg>
+                                            </div>
+                                        </ButtonNext>
+                                    </CarouselProvider>
+                                </div>
+                                <div className="border-t p-6 bg-white dark:bg-gray-800 rounded-b-3xl">
+                                    <h1 className="text-base font-medium leading-4 text-left text-gray-500 dark:text-gray-400">
+                                        {title}
+                                    </h1>
+                                    <h3 className="text-2xl font-semibold leading-6 text-left pt-3 text-gray-800 dark:text-gray-100">
+                                        {title}
+                                    </h3>
+                                    <div className="flex items-center pt-3">
+                                        <div className="pr-1">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width={14}
+                                                height={13}
+                                                viewBox="0 0 14 13"
+                                                fill="none">
+                                                <path
+                                                    d="M6.52447 0.463524C6.67415 0.00286841 7.32585 0.00286996 7.47553 0.463525L8.68386 4.18237C8.75079 4.38838 8.94277 4.52786 9.15938 4.52786H13.0696C13.554 4.52786 13.7554 5.14767 13.3635 5.43237L10.2001 7.73075C10.0248 7.85807 9.95149 8.08375 10.0184 8.28976L11.2268 12.0086C11.3764 12.4693 10.8492 12.8523 10.4573 12.5676L7.29389 10.2693C7.11865 10.1419 6.88135 10.1419 6.70611 10.2693L3.54267 12.5676C3.15081 12.8523 2.62357 12.4693 2.77325 12.0086L3.98157 8.28976C4.04851 8.08375 3.97518 7.85807 3.79994 7.73075L0.636495 5.43237C0.244639 5.14767 0.446028 4.52786 0.93039 4.52786H4.84062C5.05723 4.52786 5.24921 4.38838 5.31614 4.18237L6.52447 0.463524Z"
+                                                    fill="#4F46E5"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div className="pr-1">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width={14}
+                                                height={13}
+                                                viewBox="0 0 14 13"
+                                                fill="none">
+                                                <path
+                                                    d="M6.52447 0.463524C6.67415 0.00286841 7.32585 0.00286996 7.47553 0.463525L8.68386 4.18237C8.75079 4.38838 8.94277 4.52786 9.15938 4.52786H13.0696C13.554 4.52786 13.7554 5.14767 13.3635 5.43237L10.2001 7.73075C10.0248 7.85807 9.95149 8.08375 10.0184 8.28976L11.2268 12.0086C11.3764 12.4693 10.8492 12.8523 10.4573 12.5676L7.29389 10.2693C7.11865 10.1419 6.88135 10.1419 6.70611 10.2693L3.54267 12.5676C3.15081 12.8523 2.62357 12.4693 2.77325 12.0086L3.98157 8.28976C4.04851 8.08375 3.97518 7.85807 3.79994 7.73075L0.636495 5.43237C0.244639 5.14767 0.446028 4.52786 0.93039 4.52786H4.84062C5.05723 4.52786 5.24921 4.38838 5.31614 4.18237L6.52447 0.463524Z"
+                                                    fill="#4F46E5"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div className="pr-1">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width={14}
+                                                height={13}
+                                                viewBox="0 0 14 13"
+                                                fill="none">
+                                                <path
+                                                    d="M6.52447 0.463524C6.67415 0.00286841 7.32585 0.00286996 7.47553 0.463525L8.68386 4.18237C8.75079 4.38838 8.94277 4.52786 9.15938 4.52786H13.0696C13.554 4.52786 13.7554 5.14767 13.3635 5.43237L10.2001 7.73075C10.0248 7.85807 9.95149 8.08375 10.0184 8.28976L11.2268 12.0086C11.3764 12.4693 10.8492 12.8523 10.4573 12.5676L7.29389 10.2693C7.11865 10.1419 6.88135 10.1419 6.70611 10.2693L3.54267 12.5676C3.15081 12.8523 2.62357 12.4693 2.77325 12.0086L3.98157 8.28976C4.04851 8.08375 3.97518 7.85807 3.79994 7.73075L0.636495 5.43237C0.244639 5.14767 0.446028 4.52786 0.93039 4.52786H4.84062C5.05723 4.52786 5.24921 4.38838 5.31614 4.18237L6.52447 0.463524Z"
+                                                    fill="#4F46E5"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div className="pr-1">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width={14}
+                                                height={13}
+                                                viewBox="0 0 14 13"
+                                                fill="none">
+                                                <path
+                                                    d="M6.52447 0.463524C6.67415 0.00286841 7.32585 0.00286996 7.47553 0.463525L8.68386 4.18237C8.75079 4.38838 8.94277 4.52786 9.15938 4.52786H13.0696C13.554 4.52786 13.7554 5.14767 13.3635 5.43237L10.2001 7.73075C10.0248 7.85807 9.95149 8.08375 10.0184 8.28976L11.2268 12.0086C11.3764 12.4693 10.8492 12.8523 10.4573 12.5676L7.29389 10.2693C7.11865 10.1419 6.88135 10.1419 6.70611 10.2693L3.54267 12.5676C3.15081 12.8523 2.62357 12.4693 2.77325 12.0086L3.98157 8.28976C4.04851 8.08375 3.97518 7.85807 3.79994 7.73075L0.636495 5.43237C0.244639 5.14767 0.446028 4.52786 0.93039 4.52786H4.84062C5.05723 4.52786 5.24921 4.38838 5.31614 4.18237L6.52447 0.463524Z"
+                                                    fill="#4F46E5"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div className="pr-3">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width={14}
+                                                height={13}
+                                                viewBox="0 0 14 13"
+                                                fill="none">
+                                                <path
+                                                    d="M6.52447 0.463524C6.67415 0.00286841 7.32585 0.00286996 7.47553 0.463525L8.68386 4.18237C8.75079 4.38838 8.94277 4.52786 9.15938 4.52786H13.0696C13.554 4.52786 13.7554 5.14767 13.3635 5.43237L10.2001 7.73075C10.0248 7.85807 9.95149 8.08375 10.0184 8.28976L11.2268 12.0086C11.3764 12.4693 10.8492 12.8523 10.4573 12.5676L7.29389 10.2693C7.11865 10.1419 6.88135 10.1419 6.70611 10.2693L3.54267 12.5676C3.15081 12.8523 2.62357 12.4693 2.77325 12.0086L3.98157 8.28976C4.04851 8.08375 3.97518 7.85807 3.79994 7.73075L0.636495 5.43237C0.244639 5.14767 0.446028 4.52786 0.93039 4.52786H4.84062C5.05723 4.52786 5.24921 4.38838 5.31614 4.18237L6.52447 0.463524Z"
+                                                    fill="#4F46E5"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <p className="text-base font-medium leading-4 text-indigo-600">
+                                            5.0
+                                        </p>
+                                    </div>
+                                    <button
+                                        className="text-indigo-700 bg-transparent border-indigo-700 dark:text-gray-100 dark:bg-indigo-700 border px-4 py-2 text-sm font-medium leading-3 rounded focus:outline-none mt-5 hover:opacity-50">
+                                        Edit Product
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            )}
+        </div>
+    );
 };

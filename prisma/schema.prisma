@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id           String       @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  slug         String       @unique
+  title        String
+  instructions String
+  description  String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @default(now()) @updatedAt
+  coverImage   String?
+  cost         Int
+  bakingTime   Int
+  user         User?        @relation(fields: [userId], references: [id])
+  userId       String?      @db.ObjectId
+  ingredients  Ingredient[]
+}
+
+model Ingredient {
+  id       String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  name     String
+  price    Float
+  gramms   Int
+  calories Int
+  recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId String? @unique @db.ObjectId
+}
+
+model User {
+  id      String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  email   String   @unique
+  name    String?
+  image   String?
+  recipes Recipe[]
+}
