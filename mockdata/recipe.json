@@ -1,0 +1,16 @@
+{
+  "title": "Test title",
+  "description": "Test description",
+  "ingredients": {
+    "name": "Test name",
+    "price": 50,
+    "gramms": 50,
+    "calories": 12,
+    "_id": "61a79d1e099758fa01b07c16"
+  },
+  "instructions": "Test instructions",
+  "userId": "61b873ffcceea6710b63657e",
+  "slug": "test-title",
+  "cost": 50,
+  "bakingTime": 120
+}

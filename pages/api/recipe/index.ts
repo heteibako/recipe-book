@@ -57,6 +57,15 @@ handler
     });
 
     res.status(201).json(recipe);
+  })
+  .delete(async (req: NextApiRequest, res: NextApiResponse) => {
+    const { id } = req.body;
+    const recipe = await prisma.recipe.delete({
+      where: {
+        id,
+      },
+    });
+    res.status(200).json(recipe);
   });
 
 export default handler;
